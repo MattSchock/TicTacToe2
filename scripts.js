@@ -10,6 +10,7 @@ function clickSelector(clicked_Id) {
     let boxId = clicked_Id;
     console.log(boxId);
     document.getElementById(boxId).innerHTML = currentPlayer;
+    document.getElementById(boxId).removeAttribute("onClick");
     if (currentPlayer == player1) {
         currentPlayer = player2
         return currentPlayer;
@@ -18,3 +19,4 @@ function clickSelector(clicked_Id) {
         return currentPlayer;
     };
 };
+
