@@ -16,7 +16,7 @@ let box8 = $('#box8');
 
 
 const boxIdArr = [
-    box1, box2, box3, box4, box5, box6, box7, box8, box9
+    box0, box1, box2, box3, box4, box5, box6, box7, box8
 ];
 
 
