@@ -17,22 +17,24 @@ let box7 = $('#box7');
 let box8 = $('#box8');
 
 
+let moveOptions = ['box0', 'box1', 'box2', 'box3', 'box4', 'box5', 'box6', 'box7', 'box8'];
+
 const boxIdArr = [
     box0, box1, box2, box3, box4, box5, box6, box7, box8
 ];
 
 // console.log(boxIdArr);
 
-const winningCombos = [
-[box0, box1, box2], 
-[box3, box4, box5],  
-[box6, box7, box8],  
-[box0, box3, box6],  
-[box1, box4, box7],  
-[box2, box5, box8],  
-[box0, box4, box8],
-[box2, box4, box6]
-];
+// const winningCombos = [
+// [box0, box1, box2], 
+// [box3, box4, box5],  
+// [box6, box7, box8],  
+// [box0, box3, box6],  
+// [box1, box4, box7],  
+// [box2, box5, box8],  
+// [box0, box4, box8],
+// [box2, box4, box6]
+// ];
 
 
 let xPlayerSelections = []
@@ -50,6 +52,8 @@ function resetButton () {
     allDivs.attr('onClick', 'clickSelector(this.id)')
     xPlayerSelections.splice(0, xPlayerSelections.length);
     oPlayerSelections.splice(0, oPlayerSelections.length);
+    moveOptions.splice(0, moveOptions.length);
+    moveOptions.push('box0', 'box1', 'box2', 'box3', 'box4', 'box5', 'box6', 'box7', 'box8');
 }
 
 
@@ -58,10 +62,16 @@ function resetButton () {
 function clickSelector(clicked_Id) {
     // console.log(clicked_Id);
     let boxId = clicked_Id;
-    // console.log(boxId);
+     console.log(boxId);
     document.getElementById(boxId).innerHTML = currentPlayer;
     document.getElementById(boxId).removeAttribute("onClick");
     // console.log(document.getElementById(boxId).innerHTML);
+    for(let i =0; i < moveOptions.length; i++) {
+        if (moveOptions[i] == boxId) {
+            moveOptions.splice(i, 1);
+        }
+    };
+    console.log("available moves", moveOptions);
     
     if (currentPlayer == player1) {
         heading.text('It is O turn.');
@@ -77,6 +87,8 @@ function clickSelector(clicked_Id) {
         || xPlayerSelections.includes('box2') && xPlayerSelections.includes('box4') && xPlayerSelections.includes('box6')) {
             allDivs.removeAttr("onClick");
             heading.text("X Wins!!!!!!!")
+        } else if (moveOptions.length == 0) {
+            heading.text('Tie game')
         }
         currentPlayer = player2
         return currentPlayer;
@@ -94,6 +106,8 @@ function clickSelector(clicked_Id) {
         || xPlayerSelections.includes('box2') && xPlayerSelections.includes('box4') && xPlayerSelections.includes('box6')) {
             allDivs.removeAttr("onClick");
             heading.text("O Wins!!!!!!!")
+        } else if (moveOptions.length == 0) {
+            heading.text('Tie game')
         }
         currentPlayer = player1;
         return currentPlayer;
