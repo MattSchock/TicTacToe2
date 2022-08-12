@@ -3,9 +3,7 @@ const player2 = 'O';     //assigns player 2 as string o
 let heading = $("#heading");      //jquery to target heading to change on turns
 let currentPlayer = player1;      //starts game as x player
 let allDivs = $('.col-4')         //jquery to target all squares. 
-let i0 = ''
-let i1 = ''
-let i2 = ''
+let winAlert = $("#winAlert");     //jquery for win alert at end of game.
 
 //jquery to get divs for boxes
 let box0 = $('#box0')[0].id;
@@ -51,6 +49,8 @@ let oPlayerSelections = []
 
 //Reset button. removes text X and O and replaces onclick listeners. also clears player selections and clears and replaces move options.
 function resetButton () {
+    heading.text('New Game')
+    winAlert.text(' ')
     allDivs.text(' ')       //clears X and O
     allDivs.attr('onClick', 'clickSelector(this.id)')   //replaces onclick listeners for squares
     xPlayerSelections.splice(0, xPlayerSelections.length);    //clears x players choices array
@@ -86,8 +86,12 @@ function clickSelector(clicked_Id) {
             if(xPlayerSelections.includes(winningCombos[i][0]) && xPlayerSelections.includes(winningCombos[i][1]) && xPlayerSelections.includes(winningCombos[i][2])) {
                 allDivs.removeAttr("onClick");
                 heading.text("X Wins!!!!!");
+                document.getElementById("winAlert").removeAttribute('style');
+                winAlert.text("End of Game. Congrats X Wins!!!!")
             } else if (moveOptions.length == 0) {
                 heading.text('Tie game');
+                document.getElementById("winAlert").removeAttribute('style');
+                winAlert.text("End of Game. Tie game!");
             };
         };
         currentPlayer = player2
@@ -107,8 +111,12 @@ function clickSelector(clicked_Id) {
             if(oPlayerSelections.includes(winningCombos[i][0]) && oPlayerSelections.includes(winningCombos[i][1]) && oPlayerSelections.includes(winningCombos[i][2])) {
                 allDivs.removeAttr("onClick");
                 heading.text("O Wins!!!!!");
+                document.getElementById("winAlert").removeAttribute('style');
+                winAlert.text("End of Game, O Wins!!!!")
             } else if (moveOptions.length == 0) {
                 heading.text('Tie game');
+                document.getElementById("winAlert").removeAttribute('style');
+                winAlert.text("End of Game, Tie game!")
             };
         };
         currentPlayer = player1
