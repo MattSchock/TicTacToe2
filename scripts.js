@@ -84,16 +84,37 @@ function clickSelector(clicked_Id) {
             console.log('Testtesttest', typeof winningCombos[i][0]);
             console.log('typeof xplayer', typeof xPlayerSelections[0]);
             if(xPlayerSelections.includes(winningCombos[i][0]) && xPlayerSelections.includes(winningCombos[i][1]) && xPlayerSelections.includes(winningCombos[i][2])) {
-                alert('its working');
-            }
-            
-            }    
-                
-            
-            
-        }
-    }
-
+                allDivs.removeAttr("onClick");
+                heading.text("X Wins!!!!!");
+            } else if (moveOptions.length == 0) {
+                heading.text('Tie game');
+            };
+        };
+        currentPlayer = player2
+        return currentPlayer;
+    };
+    if (currentPlayer == player2) {
+        heading.text('It is X turn.');
+        oPlayerSelections.push(boxId);
+        console.log('xplayerselections', xPlayerSelections);
+        console.log('winning combos', winningCombos[0]);
+        console.log(oPlayerSelections, 'oplayerselections');
+        console.log(moveOptions, 'move options');
+        for( let i = 0; i < winningCombos.length; i++) {
+            console.log(winningCombos[i], winningCombos.length, 'Win conditions');
+            console.log('Testtesttest', typeof winningCombos[i][0]);
+            console.log('typeof xplayer', typeof xPlayerSelections[0]);
+            if(oPlayerSelections.includes(winningCombos[i][0]) && oPlayerSelections.includes(winningCombos[i][1]) && oPlayerSelections.includes(winningCombos[i][2])) {
+                allDivs.removeAttr("onClick");
+                heading.text("O Wins!!!!!");
+            } else if (moveOptions.length == 0) {
+                heading.text('Tie game');
+            };
+        };
+        currentPlayer = player1
+        return currentPlayer;
+    };
+};
 
 
 
